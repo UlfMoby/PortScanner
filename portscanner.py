@@ -32,7 +32,7 @@ except socket.gaierror:
     sys.exit()
 
 except socket.error:
-    print("Cloudn't connect to server")
+    print("Couldn't connect to server")
     sys.exit()
 
 t2 = datetime.now()
