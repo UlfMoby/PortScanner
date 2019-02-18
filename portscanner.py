@@ -6,21 +6,30 @@ import sys
 from datetime import datetime
 
 subprocess.call('cls', shell=True)
-
-remoteServer = input('Enter a remote host to scan')
+remoteServer = input('Enter a remote host to scan\n')
 remoteServerIP = socket.gethostbyname(remoteServer)
+portRange = input('Enter a port number to scan for, or a range of ports.\nE.g. 80 or 1-1025\n')
 
-print('Scanning remote host:', remoteServerIP)
+timeStart = datetime.now()
 
-t1 = datetime.now()
+if '-' in portRange:
+    portRange = portRange.replace("-", " ").split()
+    portRangeA = int(portRange[0])
+    portRangeB = int(portRange[1]) + 1
+else:
+    portRangeA = int(portRange)
+    portRangeB = int(portRange) + 1
 
 try:
-    for port in range(1,1025):
+    for port in range(portRangeA, portRangeB):
+        print('Scanning remote host:', remoteServerIP, 'on port {} ... '.format(port), end="")
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((remoteServerIP, port))
 
         if result == 0:
-            print("Port{}:  Open".format(port))
+            print("open!")
+        else:
+            print("closed.")
         sock.close()
 
 except KeyboardInterrupt:
@@ -35,7 +44,6 @@ except socket.error:
     print("Couldn't connect to server")
     sys.exit()
 
-t2 = datetime.now()
-total = t2 - t1
-
-print("Scan completed in:", total)
+timeEnd = datetime.now()
+timeTotal = timeEnd - timeStart
+print("\nScan completed in:", timeTotal)
