@@ -35,6 +35,7 @@ def portinfo(currentport):
         115: '115 (SFTP)',
         443: '443 (HTTPS)',
         6667: '6667 (IRC)',
+        8333: '8333 (Bitcoin)',
     }.get(currentport, currentport)
 
 try:
