@@ -1,4 +1,4 @@
-# PortScanner (ta bort och test igen)
+# PortScanner (ta bort och test igen 2)
 Simple port scanning tool written for usage in Python 3+.
   
 Usage:  
